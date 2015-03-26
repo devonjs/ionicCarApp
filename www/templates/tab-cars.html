@@ -1,0 +1,75 @@
+<ion-view view-title="Cars">
+    <ion-content>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <td>Make:</td>
+                    <td><input type="text" ng-model="car.make" placeholder="Enter Make"></td>
+                </tr>
+                <tr>
+                    <td>Model:</td>
+                    <td><input type="text" ng-model="car.model" placeholder="Enter Model"></td>
+                </tr>
+                <tr>
+                    <td>Image:</td>
+                    <td><input type="text" ng-model="car.image" placeholder="Enter Image URL"></td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="text" ng-model="car.price" placeholder="Enter Price"></td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td>Web-Page:&nbsp;</td>-->
+                    <!--<td><input type="text" ng-model="car.link" placeholder="Enter Info Link URL"></td>-->
+                <!--</tr>-->
+                <tr>
+                    <td colspan="2" align="center">
+                        <button ng-click='addCar()'>Add Car</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="col-xs-12 col-sm-6">
+                <label for="searchMake">Search Make:</label>
+                <input id="searchMake" type="text" ng-model='search.make' placeholder="Make">
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <label for="searchModel">Search Model:</label>
+                <input id="searchModel" type="text" ng-model="search.model" placeholder="Model">
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="col-xs-4">
+                <button ng-click="order='make'">Sort by Make</button>
+            </div>
+            <div class="col-xs-4">
+                <button ng-click="order='model'">Sort by Model</button>
+            </div>
+            <div class="col-xs-4">
+                <button ng-click="order='price'">Sort by Price</button>
+            </div>
+            <div class="col-xs-4">
+                <button ng-click="order=''">No Sort</button>
+            </div>
+        </div>
+        <hr>
+        <div class = "container" ng-repeat="car in myList | filter:search | orderBy:order">
+            <div class="row">
+                <div class="col-xs-6">
+                    <strong>Price:</strong><h4>{{car.price|currency}}</h4>
+                    <strong>Make:</strong> <input type="text" ng-model="car.make">
+                    <strong>Model:</strong> <input type="text" ng-model="car.model">
+                    <button ng-click='myList.$save(car)'>Update</button>
+                    <button ng-click="myList.$remove(car)">Delete</button>
+                </div>
+                <div class ="col-xs-6">
+                    <img ng-src="{{car.image}}" class="img-thumbnail img-circle" height="125px" width="175px" style="margin-top: 30px">
+                </div>
+            </div>
+            <br>
+        </div>
+    </ion-content>
+</ion-view>
